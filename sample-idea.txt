@@ -1,0 +1,4 @@
+{
+  "name": "Micro-SaaS Invoice Tracker for Freelancers",
+  "desc": "A simple web app where freelancers paste or type their outstanding invoices and the app tracks payment status, sends automatic reminder emails to clients at configurable intervals, and shows a dashboard of what's overdue, pending, and paid. No accounting features — just invoice follow-up."
+}

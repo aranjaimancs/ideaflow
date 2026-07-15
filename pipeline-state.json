@@ -1,0 +1,16 @@
+{
+  "cards": {
+    "6a57cd6c8b3d8c49a8d26af6": {
+      "slug": "dad-joke-generator",
+      "name": "dad joke generator",
+      "state": "done",
+      "startedAt": "2026-07-15T18:53:42.815Z",
+      "mvpBuildingLabelId": "6a57cdf720270e7775b76019",
+      "prUrl": "https://github.com/aranjaimancs/idea-mvps/pull/3",
+      "prNumber": 3,
+      "previewUrl": "https://aranjaimancs.github.io/idea-mvps/dad-joke-generator/",
+      "prOpenedAt": "2026-07-15T18:54:35.184Z",
+      "doneAt": "2026-07-15T18:56:58.903Z"
+    }
+  }
+}

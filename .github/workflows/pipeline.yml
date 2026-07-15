@@ -1,0 +1,81 @@
+name: Idea MVP Pipeline
+
+on:
+  schedule:
+    # Every 15 minutes
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (no writes to Trello or GitHub)"
+        type: boolean
+        default: false
+
+# Only one run at a time — never cancel a run in progress.
+concurrency:
+  group: idea-mvp-pipeline
+  cancel-in-progress: false
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout pipeline repo
+        uses: actions/checkout@v4
+        with:
+          # Use PIPELINE_GITHUB_TOKEN so the commit-state step can push.
+          token: ${{ secrets.PIPELINE_GITHUB_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: idea-mvp-pipeline/package-lock.json
+
+      - name: Install pipeline dependencies
+        working-directory: idea-mvp-pipeline
+        run: npm ci
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Run pipeline
+        working-directory: idea-mvp-pipeline
+        env:
+          TRELLO_KEY: ${{ secrets.TRELLO_KEY }}
+          TRELLO_TOKEN: ${{ secrets.TRELLO_TOKEN }}
+          TRELLO_IDEAS_LIST_ID: ${{ secrets.TRELLO_IDEAS_LIST_ID }}
+          TRELLO_DONE_LIST_ID: ${{ secrets.TRELLO_DONE_LIST_ID }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Map our secret to the env var name build.js/updateCard.js expect.
+          # Note: the built-in GITHUB_TOKEN secret can't push to other repos,
+          # so we use a PAT stored as PIPELINE_GITHUB_TOKEN.
+          GITHUB_TOKEN: ${{ secrets.PIPELINE_GITHUB_TOKEN }}
+          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+          IDEA_MVPS_REPO: ${{ secrets.IDEA_MVPS_REPO }}
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            node run.js --dry-run
+          else
+            node run.js
+          fi
+
+      - name: Commit updated pipeline state
+        # Always run so state is committed even if earlier steps partially fail.
+        if: always()
+        working-directory: idea-mvp-pipeline
+        env:
+          GITHUB_TOKEN: ${{ secrets.PIPELINE_GITHUB_TOKEN }}
+        run: |
+          git config user.email "idea-pipeline[bot]@users.noreply.github.com"
+          git config user.name "Idea Pipeline Bot"
+          git add pipeline-state.json
+          # Only commit if there's actually a change.
+          if git diff --staged --quiet; then
+            echo "pipeline-state.json unchanged — nothing to commit."
+          else
+            git commit -m "chore: update pipeline-state.json [skip ci]"
+            git push
+          fi

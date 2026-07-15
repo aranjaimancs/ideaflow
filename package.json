@@ -1,0 +1,20 @@
+{
+  "name": "idea-mvp-pipeline",
+  "version": "0.1.0",
+  "description": "Agentic pipeline that watches a Trello list and processes new cards",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node run.js",
+    "dry-run": "node run.js --dry-run",
+    "watch": "node watch.js",
+    "test-expand": "node test-expand.js",
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.54.0",
+    "dotenv": "^16.4.5"
+  }
+}
