@@ -351,6 +351,15 @@ async function commitAndPush(slug) {
     exec(`git commit -m "feat(${slug}): add MVP prototype"`);
   }
 
+  // Rebase onto the latest main so there are no conflicts when the PR merges.
+  exec("git fetch origin main");
+  try {
+    exec("git rebase origin/main");
+  } catch (e) {
+    exec("git rebase --abort");
+    throw new Error(`Rebase onto origin/main failed for "${slug}": ${e.message}`);
+  }
+
   exec(`git push -u origin "${slug}" --force-with-lease`);
   log("✓ Pushed.");
 }
@@ -428,6 +437,24 @@ async function createOrUpdatePR(slug, mvpBuildPrompt) {
 
   const pr = await createRes.json();
   log(`✓ PR created: ${pr.html_url}`);
+
+  // GitHub computes mergeability asynchronously — poll until it's settled.
+  log("Waiting for GitHub to compute mergeability…");
+  let mergeable = null;
+  for (let attempt = 0; attempt < 12; attempt++) {
+    await new Promise((r) => setTimeout(r, 5000));
+    const checkRes = await fetch(`${apiBase}/pulls/${pr.number}`, { headers });
+    if (!checkRes.ok) break;
+    const checkPr = await checkRes.json();
+    if (checkPr.mergeable !== null) {
+      mergeable = checkPr.mergeable;
+      break;
+    }
+    log(`  mergeability still computing… (${attempt + 1}/12)`);
+  }
+  if (mergeable === false) {
+    throw new Error(`PR #${pr.number} has merge conflicts even after rebase — manual inspection needed: ${pr.html_url}`);
+  }
 
   // Auto-merge the PR via squash merge.
   log(`Auto-merging PR #${pr.number}…`);
