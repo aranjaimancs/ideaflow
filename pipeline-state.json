@@ -14,20 +14,21 @@
     "6a5911cb21eb7f7c2aca1400": {
       "slug": "dad-joke-generator",
       "name": "dad joke generator",
-      "state": "building",
+      "state": "done",
       "startedAt": "2026-07-16T17:16:33.336Z",
-      "mvpBuildingLabelId": "6a57cdf720270e7775b76019"
-    },
-    "6a591343276a709f2e688e63": {
-      "slug": "dad-joke-generator",
-      "name": "dad joke generator",
-      "state": "pr_open",
-      "startedAt": "2026-07-16T17:23:05.823Z",
       "mvpBuildingLabelId": "6a57cdf720270e7775b76019",
       "prUrl": "https://github.com/aranjaimancs/idea-mvps/pull/7",
       "prNumber": 7,
       "previewUrl": "https://aranjaimancs.github.io/idea-mvps/dad-joke-generator/",
-      "prOpenedAt": "2026-07-16T17:24:25.093Z"
+      "prOpenedAt": "2026-07-16T17:43:44.479Z",
+      "doneAt": "2026-07-16T17:43:49.708Z"
+    },
+    "6a591343276a709f2e688e63": {
+      "slug": "dad-joke-generator",
+      "name": "dad joke generator",
+      "state": "building",
+      "startedAt": "2026-07-16T17:43:52.442Z",
+      "mvpBuildingLabelId": "6a57cdf720270e7775b76019"
     }
   }
 }
