@@ -95,12 +95,10 @@ async function ensureRepo() {
     exec(`git clone "${repoUrl()}" .`);
   }
 
-  // Ensure a git identity is set (needed for commits in CI-like environments).
-  const email = exec("git config user.email", { capture: true }).trim();
-  if (!email) {
-    exec(`git config user.email "idea-pipeline@local"`);
-    exec(`git config user.name "Idea Pipeline"`);
-  }
+  // Always set git identity — git config exits with code 1 when unset,
+  // which would throw. Simpler to just always write it.
+  exec(`git config user.email "idea-pipeline@local"`);
+  exec(`git config user.name "Idea Pipeline"`);
 
   // Keep the remote URL fresh so token rotation works across runs.
   exec(`git remote set-url origin "${repoUrl()}"`);
