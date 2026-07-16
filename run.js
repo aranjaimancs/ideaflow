@@ -488,4 +488,9 @@ await phaseA(state);
 section("Phase B/C — Process new cards");
 await phaseBC(state);
 
+// Run Phase A again — cards built and auto-merged during Phase B/C
+// will now be detected and finalized in the same run.
+section("Phase A (second pass) — Finalize newly merged PRs");
+await phaseA(state);
+
 banner("Run complete.");
