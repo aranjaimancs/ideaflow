@@ -1,7 +1,7 @@
 {
-  "name": "idea-mvp-pipeline",
+  "name": "ideaflow",
   "version": "0.1.0",
-  "description": "Agentic pipeline that watches a Trello list and processes new cards",
+  "description": "Agentic pipeline that turns Trello idea cards into live MVP prototypes",
   "type": "module",
   "engines": {
     "node": ">=18"

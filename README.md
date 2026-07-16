@@ -1,4 +1,4 @@
-# idea-mvp-pipeline
+# Ideaflow
 
 An agentic pipeline that turns Trello idea cards into live MVP prototypes — fully automated.
 
@@ -22,7 +22,7 @@ This project uses **two separate GitHub repositories**:
 
 | Repo | Purpose |
 |---|---|
-| `idea-mvp-pipeline` (this repo) | The brains — all the automation code, GitHub Actions workflow, and state tracking. You set this up once and leave it running. |
+| `ideaflow` (this repo) | The brains — all the automation code, GitHub Actions workflow, and state tracking. You set this up once and leave it running. |
 | `idea-mvps` (you create this) | The output — every prototype gets committed here as a subfolder. GitHub Pages serves it as a live website. |
 
 **Why separate?** The prototypes repo stays clean — just static files, no pipeline code — so GitHub Pages can serve it with no build step. Anyone can browse your `idea-mvps` repo and see every prototype that's ever been built, each at its own URL (`https://<you>.github.io/idea-mvps/<slug>/`).
@@ -46,8 +46,8 @@ This project uses **two separate GitHub repositories**:
 ### 1. Clone this repo
 
 ```bash
-git clone https://github.com/<you>/idea-mvp-pipeline.git
-cd idea-mvp-pipeline
+git clone https://github.com/<you>/ideaflow.git
+cd ideaflow
 npm install
 ```
 
@@ -173,7 +173,7 @@ Preview URL added to card description
 ## Project structure
 
 ```
-idea-mvp-pipeline/
+ideaflow/
 ├── run.js          # Orchestrator — runs the full pipeline
 ├── watch.js        # Fetches unprocessed cards from Trello
 ├── expand.js       # Expands idea via Claude API

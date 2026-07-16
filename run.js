@@ -478,7 +478,7 @@ async function phaseBC(state) {
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
-banner(`idea-mvp-pipeline  ${DRY_RUN ? "[DRY RUN]" : ""}  ${new Date().toISOString()}`);
+banner(`ideaflow  ${DRY_RUN ? "[DRY RUN]" : ""}  ${new Date().toISOString()}`);
 
 const state = loadState();
 
