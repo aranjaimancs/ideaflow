@@ -32,29 +32,26 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
-          cache-dependency-path: idea-mvp-pipeline/package-lock.json
 
       - name: Install pipeline dependencies
-        working-directory: idea-mvp-pipeline
         run: npm ci
 
       - name: Install Claude Code CLI
         run: npm install -g @anthropic-ai/claude-code
 
       - name: Run pipeline
-        working-directory: idea-mvp-pipeline
         env:
           TRELLO_KEY: ${{ secrets.TRELLO_KEY }}
           TRELLO_TOKEN: ${{ secrets.TRELLO_TOKEN }}
           TRELLO_IDEAS_LIST_ID: ${{ secrets.TRELLO_IDEAS_LIST_ID }}
           TRELLO_DONE_LIST_ID: ${{ secrets.TRELLO_DONE_LIST_ID }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          # Map our secret to the env var name build.js/updateCard.js expect.
           # Note: the built-in GITHUB_TOKEN secret can't push to other repos,
           # so we use a PAT stored as PIPELINE_GITHUB_TOKEN.
           GITHUB_TOKEN: ${{ secrets.PIPELINE_GITHUB_TOKEN }}
           GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
           IDEA_MVPS_REPO: ${{ secrets.IDEA_MVPS_REPO }}
+          CI: "true"
         run: |
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             node run.js --dry-run
@@ -65,7 +62,6 @@ jobs:
       - name: Commit updated pipeline state
         # Always run so state is committed even if earlier steps partially fail.
         if: always()
-        working-directory: idea-mvp-pipeline
         env:
           GITHUB_TOKEN: ${{ secrets.PIPELINE_GITHUB_TOKEN }}
         run: |
