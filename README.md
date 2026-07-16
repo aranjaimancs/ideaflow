@@ -16,6 +16,19 @@ GitHub Pages hosts every prototype automatically at `https://<you>.github.io/<re
 
 ---
 
+## Two repos, one pipeline
+
+This project uses **two separate GitHub repositories**:
+
+| Repo | Purpose |
+|---|---|
+| `idea-mvp-pipeline` (this repo) | The brains — all the automation code, GitHub Actions workflow, and state tracking. You set this up once and leave it running. |
+| `idea-mvps` (you create this) | The output — every prototype gets committed here as a subfolder. GitHub Pages serves it as a live website. |
+
+**Why separate?** The prototypes repo stays clean — just static files, no pipeline code — so GitHub Pages can serve it with no build step. Anyone can browse your `idea-mvps` repo and see every prototype that's ever been built, each at its own URL (`https://<you>.github.io/idea-mvps/<slug>/`).
+
+---
+
 ## Prerequisites
 
 - Node.js 18+
