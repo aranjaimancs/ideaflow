@@ -78,14 +78,8 @@ ${desc || "(no description provided)"}`;
 
   const response = await client.messages.create({
     model: MODEL,
-    max_tokens: 2048,
+    max_tokens: 8192,
     system: SYSTEM_PROMPT,
-    output_config: {
-      format: {
-        type: "json_schema",
-        schema: OUTPUT_SCHEMA,
-      },
-    },
     messages: [{ role: "user", content: userMessage }],
   });
 
