@@ -71,6 +71,20 @@
       "previewUrl": "https://aranjaimancs.github.io/idea-mvps/guess-the-player-daily-game-nba-or-nfl/",
       "prOpenedAt": "2026-08-02T10:55:21.416Z",
       "doneAt": "2026-08-02T10:55:23.388Z"
+    },
+    "6a774662126b93c3fd8174a2": {
+      "slug": "market-sizing-daily-game",
+      "name": "market sizing daily game",
+      "state": "building",
+      "startedAt": "2026-08-08T16:11:59.660Z",
+      "mvpBuildingLabelId": "6a57cdf720270e7775b76019"
+    },
+    "6a77554ced54bfeff31cc423": {
+      "slug": "grocery-store-efficient-app",
+      "name": "grocery store efficient app",
+      "state": "building",
+      "startedAt": "2026-08-08T16:12:12.545Z",
+      "mvpBuildingLabelId": "6a57cdf720270e7775b76019"
     }
   }
 }
