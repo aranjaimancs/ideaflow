@@ -95,6 +95,18 @@
       "previewUrl": "https://aranjaimancs.github.io/idea-mvps/grocery-store-efficient-app/",
       "prOpenedAt": "2026-08-08T17:01:18.544Z",
       "doneAt": "2026-08-08T17:01:22.665Z"
+    },
+    "6a947631dbfc985b55ed1079": {
+      "slug": "internship-schedule-tracker-gives-me-updated-internships-for",
+      "name": "Internship Schedule Tracker (gives me updated internships for summer 2028 using api of main job boards and social media)",
+      "state": "done",
+      "startedAt": "2026-08-30T18:36:06.854Z",
+      "mvpBuildingLabelId": "6a57cdf720270e7775b76019",
+      "prUrl": "https://github.com/aranjaimancs/idea-mvps/pull/15",
+      "prNumber": 15,
+      "previewUrl": "https://aranjaimancs.github.io/idea-mvps/internship-schedule-tracker-gives-me-updated-internships-for/",
+      "prOpenedAt": "2026-08-30T18:38:23.212Z",
+      "doneAt": "2026-08-30T18:38:24.836Z"
     }
   }
 }
